@@ -8,6 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import img1 from '@/assets/2025-10-14 23.38.46.jpg';
+import img2 from '@/assets/2025-10-14 23.39.52.jpg';
+import img3 from '@/assets/2025-10-14 23.39.56.jpg';
+import img4 from '@/assets/2025-10-14 23.39.59.jpg';
 
 export default function Home() {
   const [wasteType, setWasteType] = useState('');
@@ -32,14 +36,14 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Truck className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-blue-600">Title</span>
+            <span className="text-2xl font-bold text-blue-600">Вывоз мусора </span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="tel:+79210900858" className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition">
+            <a href="tel:+79967711327" className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition">
               <Phone className="h-5 w-5" />
-              <span className="font-semibold hidden md:inline">+7 (921) 090-08-58</span>
+              <span className="font-semibold hidden md:inline">+7 (996) 771-13-27</span>
             </a>
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={() => window.open('tel:+79967711327', '_blank')} className="bg-blue-600 hover:bg-blue-700">
               Заказать звонок
             </Button>
           </div>
@@ -56,12 +60,12 @@ export default function Home() {
                 <span className="text-white text-sm font-medium">🚛 Работаем с 2015 года</span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
-                Вывоз мусора в Санкт-Петербурге
+              <h1 className="text-xl md:text-4xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
+                Вывоз строительного мусора в Санкт-Петербурге и Ленинградской области
               </h1>
               
               <p className="text-xl md:text-2xl mb-8 text-blue-50 drop-shadow">
-                Профессиональный вывоз строительного, бытового и офисного мусора. Собственный автопарк из 35 машин.
+                Профессиональный вывоз строительного мусора. Собственный автопарк из 7 машин.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -77,11 +81,11 @@ export default function Home() {
               
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">35+</div>
+                  <div className="text-3xl font-bold text-white mb-1">8+</div>
                   <div className="text-sm text-blue-100">Машин</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">6-36</div>
+                  <div className="text-3xl font-bold text-white mb-1">6-27</div>
                   <div className="text-sm text-blue-100">Объем м³</div>
                 </div>
                 <div className="text-center">
@@ -96,7 +100,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="relative group">
                     <img
-                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80"
+                      src={img1.src}
                       alt="Контейнер ПУХТО для строительного мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
@@ -105,7 +109,7 @@ export default function Home() {
                   </div>
                   <div className="relative group">
                     <img
-                      src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=600&q=80"
+                      src={img2.src}
                       alt="Контейнер для мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
@@ -117,7 +121,7 @@ export default function Home() {
                 <div className="space-y-4 mt-8">
                   <div className="relative group">
                     <img
-                      src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&q=80"
+                      src={img3.src}
                       alt="Вывоз мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
@@ -126,7 +130,7 @@ export default function Home() {
                   </div>
                   <div className="relative group">
                     <img
-                      src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=600&q=80"
+                      src={img4.src}
                       alt="Грузовик для вывоза мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
@@ -150,9 +154,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { number: '35+', label: 'Машин в автопарке' },
-              { number: '8-22', label: 'Часы работы' },
-              { number: '6-36', label: 'Объем контейнеров м³' },
+              { number: '8+', label: 'Машин в автопарке' },
+              { number: '24/7', label: 'Часы работы' },
+              { number: '6-27', label: 'Объем контейнеров м³' },
               { number: '100%', label: 'Экологичность' }
             ].map((stat, index) => (
               <div key={index} className="p-6">
@@ -489,7 +493,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-            <p>&copy; 2024 Беркана. Все права защищены.</p>
+            <p>&copy; 2025 Вывоз мусора в Санкт-Петербурге и Ленинградской области. Все права защищены.</p>
           </div>
         </div>
       </footer>
