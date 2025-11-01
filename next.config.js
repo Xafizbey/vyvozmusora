@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export', // Закомментировано для dev режима с network IP
   eslint: {
     ignoreDuringBuilds: true,
   },

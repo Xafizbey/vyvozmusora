@@ -1,12 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Phone, Truck, Trash2, Building2, Chrome as HomeIcon, Package, Calculator, CircleCheck as CheckCircle, Star, MapPin, Mail, MessageCircle, Container } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, Truck, Calculator, CircleCheck as CheckCircle, Star, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import img1 from '@/assets/2025-10-14 23.38.46.jpg';
 import img2 from '@/assets/2025-10-14 23.39.52.jpg';
@@ -14,20 +13,60 @@ import img3 from '@/assets/2025-10-14 23.39.56.jpg';
 import img4 from '@/assets/2025-10-14 23.39.59.jpg';
 
 export default function Home() {
-  const [wasteType, setWasteType] = useState('');
   const [volume, setVolume] = useState('');
   const [calculatedPrice, setCalculatedPrice] = useState<number | null>(null);
+  const [formName, setFormName] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formMessage, setFormMessage] = useState('');
 
   const calculatePrice = () => {
-    if (!wasteType || !volume) return;
+    if (!volume) {
+      setCalculatedPrice(null);
+      return;
+    }
 
-    const basePrice = wasteType === 'construction' ? 300 :
-                     wasteType === 'household' ? 200 :
-                     wasteType === 'office' ? 250 : 200;
+    const basePrice = 3000; // Строительный мусор
 
     const volumeNum = parseFloat(volume);
+    if (isNaN(volumeNum) || volumeNum <= 0) {
+      setCalculatedPrice(null);
+      return;
+    }
+    
     const price = basePrice * volumeNum;
-    setCalculatedPrice(price);
+    setCalculatedPrice(Math.round(price));
+  };
+
+  const handleCalculatorSubmit = () => {
+    if (calculatedPrice === null) return;
+    
+    const message = `Заявка на вывоз строительного мусора\n\nОбъем: ${volume} м³\nРасчетная стоимость: ${calculatedPrice} ₽\n\nПрошу связаться со мной для уточнения деталей.`;
+    
+    const telegramPhone = '79967711327';
+    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
+    
+    window.open(telegramUrl, '_blank');
+  };
+
+  // Автоматический расчет при изменении объема
+  useEffect(() => {
+    calculatePrice();
+  }, [volume]);
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Формируем сообщение для Telegram
+    const message = `Заявка от: ${formName}\nТелефон: ${formPhone}\nСообщение: ${formMessage}`;
+    
+    // Номер телефона для Telegram (замените на ваш номер)
+    const telegramPhone = '79967711327';
+    
+    // Создаем ссылку на Telegram с предзаполненным сообщением
+    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
+    
+    // Перенаправляем пользователя в Telegram
+    window.open(telegramUrl, '_blank');
   };
 
   return (
@@ -110,7 +149,7 @@ export default function Home() {
                   <div className="relative group">
                     <img
                       src={img2.src}
-                      alt="Контейнер для мусора"
+                      alt="Контейнер для строительного мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
@@ -122,7 +161,7 @@ export default function Home() {
                   <div className="relative group">
                     <img
                       src={img3.src}
-                      alt="Вывоз мусора"
+                      alt="Вывоз строительного мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
@@ -131,7 +170,7 @@ export default function Home() {
                   <div className="relative group">
                     <img
                       src={img4.src}
-                      alt="Грузовик для вывоза мусора"
+                      alt="Грузовик для вывоза строительного мусора"
                       className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
@@ -168,89 +207,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-container-pattern-gray">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Наши услуги</h2>
-            <p className="text-xl text-gray-600">Полный спектр услуг по вывозу отходов</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Building2,
-                title: 'Строительный мусор',
-                description: 'Вывоз строительных отходов, бетона, кирпича, штукатурки после ремонта или демонтажа',
-                features: ['Контейнеры 6-36 м³', 'Быстрая подача', 'Помощь в загрузке'],
-                image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80'
-              },
-              {
-                icon: HomeIcon,
-                title: 'Бытовой мусор',
-                description: 'Вывоз бытовых отходов из квартир, домов, дач и садовых участков',
-                features: ['Мебель и техника', 'Вывоз хлама', 'Уборка территории'],
-                image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&q=80'
-              },
-              {
-                icon: Package,
-                title: 'Офисный мусор',
-                description: 'Вывоз офисных отходов, мебели, оргтехники и архивов',
-                features: ['Переезд офиса', 'Утилизация документов', 'Регулярный вывоз'],
-                image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80'
-              },
-              {
-                icon: Container,
-                title: 'Аренда контейнеров ПУХТО',
-                description: 'Предоставление контейнеров ПУХТО различного объема для сбора отходов',
-                features: ['От 6 до 36 м³', 'Гибкие сроки', 'Доставка и вывоз'],
-                image: 'https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=400&q=80'
-              },
-              {
-                icon: Trash2,
-                title: 'Вывоз на утилизацию',
-                description: 'Легальная утилизация всех видов отходов с предоставлением документов',
-                features: ['Экологичность', 'Документы', 'Сертификаты'],
-                image: 'https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=400&q=80'
-              },
-              {
-                icon: Truck,
-                title: 'Транспортировка',
-                description: 'Транспортировка грузов самосвалами и бортовыми машинами',
-                features: ['Любые районы', 'Быстрая подача', 'Опытные водители'],
-                image: 'https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=400&q=80'
-              }
-            ].map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition border-t-4 border-t-blue-600 overflow-hidden">
-                {service.image && (
-                  <div className="w-full h-48 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
-                <CardHeader>
-                  <service.icon className="h-12 w-12 text-blue-600 mb-4" />
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription className="text-base">{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-20 bg-truck-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
@@ -263,19 +219,9 @@ export default function Home() {
             <Card className="shadow-xl">
               <CardContent className="p-8">
                 <div className="space-y-6">
-                  <div>
-                    <Label htmlFor="waste-type" className="text-base">Тип мусора</Label>
-                    <Select value={wasteType} onValueChange={setWasteType}>
-                      <SelectTrigger id="waste-type" className="mt-2">
-                        <SelectValue placeholder="Выберите тип мусора" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="construction">Строительный мусор</SelectItem>
-                        <SelectItem value="household">Бытовой мусор</SelectItem>
-                        <SelectItem value="office">Офисный мусор</SelectItem>
-                        <SelectItem value="other">Другое</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 text-center">
+                    <p className="text-blue-800 font-semibold">Вывоз строительного мусора</p>
+                    <p className="text-blue-600 text-sm mt-1">Базовая цена: 3 000 ₽ за м³</p>
                   </div>
 
                   <div>
@@ -288,6 +234,7 @@ export default function Home() {
                       onChange={(e) => setVolume(e.target.value)}
                       className="mt-2"
                       min="1"
+                      step="0.5"
                     />
                   </div>
 
@@ -295,15 +242,28 @@ export default function Home() {
                     onClick={calculatePrice}
                     className="w-full bg-blue-600 hover:bg-blue-700"
                     size="lg"
+                    type="button"
                   >
                     Рассчитать стоимость
                   </Button>
 
                   {calculatedPrice !== null && (
-                    <div className="bg-blue-50 p-6 rounded-lg text-center border-2 border-blue-200">
-                      <p className="text-gray-600 mb-2">Примерная стоимость:</p>
-                      <p className="text-4xl font-bold text-blue-600">{calculatedPrice} ₽</p>
-                      <p className="text-sm text-gray-500 mt-2">Точную стоимость уточняйте у менеджера</p>
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-300 space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
+                      <div className="text-center">
+                        <p className="text-gray-600 mb-2 font-medium">Примерная стоимость:</p>
+                        <p className="text-5xl font-bold text-blue-600 mb-1">{calculatedPrice.toLocaleString('ru-RU')} ₽</p>
+                        <p className="text-sm text-gray-500">Точную стоимость уточняйте у менеджера</p>
+                      </div>
+                      
+                      <Button
+                        onClick={handleCalculatorSubmit}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white"
+                        size="lg"
+                        type="button"
+                      >
+                        <MessageCircle className="mr-2 h-5 w-5" />
+                        Отправить заявку в Telegram
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -325,7 +285,7 @@ export default function Home() {
               {
                 icon: Truck,
                 title: 'Собственный автопарк',
-                description: '35 единиц техники различной грузоподъемности'
+                description: '8Калькулятор стоимости единиц техники различной грузоподъемности'
               },
               {
                 icon: CheckCircle,
@@ -406,15 +366,30 @@ export default function Home() {
 
             <Card className="shadow-2xl">
               <CardContent className="p-8">
-                <form className="space-y-6">
+                <form onSubmit={handleFormSubmit} className="space-y-6">
                   <div>
                     <Label htmlFor="name">Ваше имя</Label>
-                    <Input id="name" placeholder="Введите ваше имя" className="mt-2" />
+                    <Input 
+                      id="name" 
+                      placeholder="Введите ваше имя" 
+                      className="mt-2"
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      required
+                    />
                   </div>
 
                   <div>
                     <Label htmlFor="phone">Телефон</Label>
-                    <Input id="phone" type="tel" placeholder="+7 (___) ___-__-__" className="mt-2" />
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="+7 (___) ___-__-__" 
+                      className="mt-2"
+                      value={formPhone}
+                      onChange={(e) => setFormPhone(e.target.value)}
+                      required
+                    />
                   </div>
 
                   <div>
@@ -424,11 +399,14 @@ export default function Home() {
                       placeholder="Опишите ваш заказ или вопрос"
                       className="mt-2"
                       rows={4}
+                      value={formMessage}
+                      onChange={(e) => setFormMessage(e.target.value)}
+                      required
                     />
                   </div>
 
                   <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" size="lg">
-                    Отправить заявку
+                    Отправить в Telegram
                   </Button>
                 </form>
               </CardContent>
@@ -451,12 +429,12 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="font-bold text-white mb-4">Услуги</h3>
+              <h3 className="font-bold text-white mb-4">О компании</h3>
               <ul className="space-y-2 text-sm">
-                <li>Вывоз строительного мусора</li>
-                <li>Вывоз бытового мусора</li>
-                <li>Вывоз офисного мусора</li>
-                <li>Аренда контейнеров</li>
+                <li>Собственный автопарк</li>
+                <li>Работаем с 2015 года</li>
+                <li>Легальная утилизация</li>
+                <li>Быстрая подача техники</li>
               </ul>
             </div>
 
@@ -465,7 +443,7 @@ export default function Home() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
                   <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <a href="tel:+79210900858" className="hover:text-blue-400">+7 (921) 090-08-58</a>
+                  <a href="tel:+79210900858" className="hover:text-blue-400">+7 (996) 771-13-27</a>
                 </li>
                 <li className="flex items-start gap-2">
                   <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
