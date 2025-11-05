@@ -195,7 +195,7 @@ export default function Home() {
               
               <p className="text-xl md:text-2xl mb-8 text-blue-50 drop-shadow">
                 Профессиональный вывоз строительного мусора. Собственный
-                автопарк из 7 машин.
+                автопарк из 8 машин.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -912,14 +912,13 @@ export default function Home() {
                   className="border-gray-600 hover:bg-gray-800"
                   onClick={handleWhatsAppContact}
                 >
-                  <MessageCircle className="h-4 w-4" />
                   <Image src={whatsappIcon} alt="WhatsApp" width={32} height={32} />
                 </Button>
                 <Button
                   size="sm"
                   variant='link'
                   className="border-gray-600 hover:bg-gray-800"
-                  onClick={handleCall}
+                  onClick={handleTelegramContact}
                 >
                   <Image src={telegramIcon} alt="telegram" width={32} height={32} />
                 </Button>
