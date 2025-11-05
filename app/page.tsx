@@ -99,11 +99,14 @@ export default function Home() {
     
     // Номер телефона для WhatsApp (замените на ваш номер)
     const whatsappPhone = "79967711327";
+    const telegramPhone = "+79967711327";
 
     // Создаем ссылку на WhatsApp с предзаполненным сообщением
     const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
       message
     )}`;
+
+    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
 
     // Перенаправляем пользователя в WhatsApp
     window.open(whatsappUrl, "_blank");
@@ -125,6 +128,13 @@ export default function Home() {
     const whatsappPhone = "79967711327";
     const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
+  };
+
+  const handleTelegramContact = () => {
+    const message = "Здравствуйте! Хочу заказать вывоз мусора.";
+    const telegramPhone = "+79967711327";
+    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
+    window.open(telegramUrl, "_blank");
   };
 
   return (
@@ -223,17 +233,17 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="relative hidden md:block">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
+            <div className="relative mt-12 md:mt-0">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
+                <div className="space-y-3 md:space-y-4">
                   <div className="relative group">
                     <img
                       src={img1.src}
                       alt="Контейнер ПУХТО для строительного мусора"
-                      className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
+                      className="rounded-lg md:rounded-xl shadow-2xl w-full h-36 md:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
-                    <div className="absolute bottom-3 left-3 text-white font-semibold text-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg md:rounded-xl"></div>
+                    <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-white font-semibold text-xs md:text-sm">
                       Контейнер ПУХТО
                     </div>
                   </div>
@@ -241,24 +251,24 @@ export default function Home() {
                     <img
                       src={img2.src}
                       alt="Контейнер для строительного мусора"
-                      className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
+                      className="rounded-lg md:rounded-xl shadow-2xl w-full h-36 md:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
-                    <div className="absolute bottom-3 left-3 text-white font-semibold text-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg md:rounded-xl"></div>
+                    <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-white font-semibold text-xs md:text-sm">
                       Разные объемы
                     </div>
                   </div>
                 </div>
                 
-                <div className="space-y-4 mt-8">
+                <div className="space-y-3 md:space-y-4 md:mt-8">
                   <div className="relative group">
                     <img
                       src={img3.src}
                       alt="Вывоз строительного мусора"
-                      className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
+                      className="rounded-lg md:rounded-xl shadow-2xl w-full h-36 md:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
-                    <div className="absolute bottom-3 left-3 text-white font-semibold text-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg md:rounded-xl"></div>
+                    <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-white font-semibold text-xs md:text-sm">
                       Быстрая подача
                     </div>
                   </div>
@@ -266,10 +276,10 @@ export default function Home() {
                     <img
                       src={img4.src}
                       alt="Грузовик для вывоза строительного мусора"
-                      className="rounded-xl shadow-2xl w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
+                      className="rounded-lg md:rounded-xl shadow-2xl w-full h-36 md:h-48 object-cover transform group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/20"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
-                    <div className="absolute bottom-3 left-3 text-white font-semibold text-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg md:rounded-xl"></div>
+                    <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-white font-semibold text-xs md:text-sm">
                       Собственный парк
                     </div>
                   </div>
@@ -457,8 +467,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
+          <div className="text-center flex flex-col gap-4 mt-12 items-center">
             <Button
               size="lg"
               onClick={handleWhatsAppContact}
@@ -466,6 +475,14 @@ export default function Home() {
             >
               <MessageCircle className="mr-2 h-5 w-5" />
               Оставить заявку в WhatsApp
+            </Button>
+            <Button
+              size="lg"
+              onClick={handleTelegramContact}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Оставить заявку в Telegram
             </Button>
           </div>
         </div>
@@ -596,7 +613,7 @@ export default function Home() {
                       { service: "Срочная подача (1 час)", price: "+ 2 000 ₽" },
                       { service: "Погрузка грузчиками", price: "от 500 ₽/час" },
                       { service: "Подъем/спуск с этажа", price: "от 300 ₽/этаж" },
-                      { service: "Вывоз в область (за МКАД)", price: "от 50 ₽/км" },
+                      { service: "Вывоз в область (за КАД)", price: "от 50 ₽/км" },
                       { service: "Демонтаж конструкций", price: "договорная" },
                       { service: "Аренда контейнера (сутки)", price: "от 1 000 ₽" },
                     ].map((item, index) => (
@@ -874,7 +891,7 @@ export default function Home() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
                   <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <a href="tel:+79967711327" className="hover:text-blue-400">
+                  <a href="https://t.me/+79967711327" className="hover:text-blue-400">
                     +7 (996) 771-13-27
                   </a>
                 </li>
