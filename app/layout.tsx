@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Title',
-  description: 'Профессиональный вывоз мусора в Санкт-Петербурге',
+  title: 'Вывоз мусора в Санкт-Петербурге и Ленинградской области',
+  description: 'Профессиональный вывоз мусора в Санкт-Петербурге и Ленинградской области',
   keywords: [
     'вывоз мусора',
     'вывоз строительного мусора',

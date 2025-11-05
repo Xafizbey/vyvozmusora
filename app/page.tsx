@@ -42,10 +42,10 @@ export default function Home() {
     
     const message = `Заявка на вывоз строительного мусора\n\nОбъем: ${volume} м³\nРасчетная стоимость: ${calculatedPrice} ₽\n\nПрошу связаться со мной для уточнения деталей.`;
     
-    const telegramPhone = '79967711327';
-    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
+    const whatsappPhone = '79967711327';
+    const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
     
-    window.open(telegramUrl, '_blank');
+    window.open(whatsappUrl, '_blank');
   };
 
   // Автоматический расчет при изменении объема
@@ -56,17 +56,17 @@ export default function Home() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Формируем сообщение для Telegram
+    // Формируем сообщение для WhatsApp
     const message = `Заявка от: ${formName}\nТелефон: ${formPhone}\nСообщение: ${formMessage}`;
     
-    // Номер телефона для Telegram (замените на ваш номер)
-    const telegramPhone = '79967711327';
+    // Номер телефона для WhatsApp (замените на ваш номер)
+    const whatsappPhone = '79967711327';
     
-    // Создаем ссылку на Telegram с предзаполненным сообщением
-    const telegramUrl = `https://t.me/${telegramPhone}?text=${encodeURIComponent(message)}`;
+    // Создаем ссылку на WhatsApp с предзаполненным сообщением
+    const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
     
-    // Перенаправляем пользователя в Telegram
-    window.open(telegramUrl, '_blank');
+    // Перенаправляем пользователя в WhatsApp
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -262,7 +262,7 @@ export default function Home() {
                         type="button"
                       >
                         <MessageCircle className="mr-2 h-5 w-5" />
-                        Отправить заявку в Telegram
+                        Отправить заявку в WhatsApp
                       </Button>
                     </div>
                   )}
@@ -383,7 +383,7 @@ export default function Home() {
                     <Label htmlFor="phone">Телефон</Label>
                     <Input 
                       id="phone" 
-                      type="tel" 
+                      type="tel"
                       placeholder="+7 (___) ___-__-__" 
                       className="mt-2"
                       value={formPhone}
@@ -406,7 +406,7 @@ export default function Home() {
                   </div>
 
                   <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" size="lg">
-                    Отправить в Telegram
+                    Отправить в WhatsApp
                   </Button>
                 </form>
               </CardContent>
@@ -443,7 +443,7 @@ export default function Home() {
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
                   <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <a href="tel:+79210900858" className="hover:text-blue-400">+7 (996) 771-13-27</a>
+                  <a href="tel:+79967711327" className="hover:text-blue-400">+7 (996) 771-13-27</a>
                 </li>
                 <li className="flex items-start gap-2">
                   <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
