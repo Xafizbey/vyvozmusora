@@ -119,7 +119,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
+      {/* Google tag (gtag.js) */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17705723851"></script>
       <body className={inter.className}>
+        <Script dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17705723851');`
+        }} />
         {/* Яндекс.Метрика */}
         <Script
           id="yandex-metrika"
@@ -149,9 +158,9 @@ export default function RootLayout({
         <noscript>
           <div>
             <img
-              src="https://mc.yandex.ru/watch/105148136" 
-              style={{ position: 'absolute', left: '-9999px' }} 
-              alt="" 
+              src="https://mc.yandex.ru/watch/105148136"
+              style={{ position: 'absolute', left: '-9999px' }}
+              alt=""
             />
           </div>
         </noscript>
